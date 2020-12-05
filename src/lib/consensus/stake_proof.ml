@@ -1,5 +1,6 @@
 open Core
 open Coda_base
+open Signature_lib
 
 [%%versioned
 module Stable = struct
@@ -8,12 +9,11 @@ module Stable = struct
   module V1 = struct
     type t =
       { delegator: Account.Index.Stable.V1.t
-      ; delegator_pk: Signature_lib.Public_key.Compressed.Stable.V1.t
+      ; delegator_pk: Public_key.Compressed.Stable.V1.t
+      ; coinbase_receiver_pk: Public_key.Compressed.Stable.V1.t
       ; ledger: Sparse_ledger.Stable.V1.t
-      ; producer_private_key: Signature_lib.Private_key.Stable.V1.t
-      ; producer_public_key: Signature_lib.Public_key.Stable.V1.t
-      ; coinbase_receiver_pk: Signature_lib.Public_key.Compressed.Stable.V1.t
-      }
+      ; producer_private_key: Private_key.Stable.V1.t
+      ; producer_public_key: Public_key.Stable.V1.t }
 
     let to_latest = Fn.id
   end
@@ -26,9 +26,9 @@ end]
 *)
 type t = Stable.Latest.t =
   { delegator: Account.Index.t
-  ; delegator_pk: Signature_lib.Public_key.Compressed.t
+  ; delegator_pk: Public_key.Compressed.t
+  ; coinbase_receiver_pk: Public_key.Compressed.t
   ; ledger: Sparse_ledger.t
-  ; producer_private_key: Signature_lib.Private_key.t
-  ; producer_public_key: Signature_lib.Public_key.t
-  ; coinbase_receiver_pk: Signature_lib.Public_key.Compressed.t }
+  ; producer_private_key: Private_key.t
+  ; producer_public_key: Public_key.t }
 [@@deriving to_yojson, sexp]
